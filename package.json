@@ -1,0 +1,35 @@
+{
+  "name": "gulp-theme",
+  "version": "1.0.0",
+  "description": "This is Gulp JS theme",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build --prod"
+  },
+  "author": "Andrija Nikolic",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "autoprefixer": "^9.8.5",
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-wp-pot": "^2.4.3",
+    "yargs": "^15.4.1"
+  },
+  "dependencies": {
+    "gulp-concat": "^2.6.1",
+    "merge-stream": "^2.0.0",
+    "merge2": "^1.4.1"
+  }
+}

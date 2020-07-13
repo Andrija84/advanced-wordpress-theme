@@ -1,0 +1,6 @@
+//src/scss/bundle.scss
+@import './components/homepage.scss';
+$colour: red;
+body {
+  background-color: $colour;
+}

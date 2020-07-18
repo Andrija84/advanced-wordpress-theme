@@ -1,0 +1,162 @@
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 2200px) {
+
+.main-menu-list-inner{height:72vh;}
+h1 {font-size: 58px;line-height: 58px;}
+h2 {font-size: 52px;line-height:52px;}
+h3 {font-size: 46px;line-height: 46px;}
+h4 {font-size: 32px;line-height: 32px;}
+h5 {font-size: 26px;line-height: 26px;}
+h6 {font-size: 25px;line-height: 25px;}
+p {font-size: 20px;letter-spacing: 0.4px;line-height: 30px;}
+
+}
+
+
+
+
+@media (max-width: 1679px) {
+
+h1{font-size:32px;line-height:42px;}
+h2{font-size:30px;line-height:40px;}
+h3{font-size:24px;}
+
+
+}
+
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .main-menu{margin-right:80px;}
+  .main-menu > li{margin:0 15px;}
+  .main-menu > li a{font-size: 14px;}
+  .footer-content-inner-left{width:50%;}
+  .footer-content-inner-right{width:50%;}
+  .footer-content-left{margin:0 auto;}
+  .footer-content-left li{margin:11px 0;}
+}
+
+
+/* MOBILE BREAKPOINT */
+@media (max-width: 1023px) {
+  .main-menu{display:none;}
+  .burger{display:inline-block;}
+  .header-sm-container{display:none!important;}
+  .footer-content-right{width:70%;}
+  .footer-content-left{width:auto;}
+  .footer-content-inner-left{width:50%;}
+  .footer-content-inner-right{width:50%;}
+  .footer-content-left{margin:0 auto;}
+  .footer-content-left li{margin:11px 0;}
+  
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .footer-content-right{width:100%;text-align:center;}
+  .footer-content-left{width:100%;text-align:center;}
+  #menu-footer-menu{text-align:center;margin:75px 0;}
+  .footer-content-right-sm{margin:0 auto;display:inline-block;padding-top:50px;}
+  .footer-content-right img{float:unset;}
+  .footer-bottom {padding:50px 0;height: auto;width: 100%;}
+  .footer-bottom > div{display: grid;}
+  .footer-bottom-menu{display:block;order:1;}
+  .footer-bottom-left{text-align:center;float:unset;order:2;margin:12px 0;}
+  .footer-bottom-right{text-align:center;float:unset;order:3;margin:12px 0;}
+  .footer-content-top-links{display:none;}
+  .footer-content-right-sm a{width:25px;height:25px;}
+  
+}
+
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/*
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  
+
+}
+
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+
+}
+
+@media (max-width: 767px) and (orientation: landscape){
+
+}
+
+
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (max-width: 480px) {
+
+  h1{font-size:28px;line-height:42px;}
+  h2{font-size:26px;line-height:40px;}
+  h3{font-size:24px;}
+  .kontkat-form-left{width:100%;}
+  .kontkat-form-right{width:100%;}
+  a.footer-content-inner-right-icon{display:none;}
+
+}
+
+
+
+
+
+
+/* iPhone X */
+@media only screen
+    and (device-width : 375px)
+    and (device-height : 812px)
+    and (-webkit-device-pixel-ratio : 3) {
+
+
+	}
+
+/* iPhone 8 */
+@media only screen
+    and (device-width : 375px)
+    and (device-height : 667px)
+    and (-webkit-device-pixel-ratio : 2) {
+
+
+
+	}
+
+/* iPhone 8 Plus */
+@media only screen
+    and (device-width : 414px)
+    and (device-height : 736px)
+    and (-webkit-device-pixel-ratio : 3) {
+
+	}

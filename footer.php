@@ -1,57 +1,79 @@
-    <div id="footer">
+<div id="footer">
 
-				<div class="container">
+  <div class="footer-content padding-left-130">
+  <div class="footer-content-top-links padding-15">
+    <a href="#">Kontakt</a>
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutzerklärung</a>
 
-					<hr></hr>
-
-          <div class="footer-first">
-            <div class="footer-left-first" style="">
-              <div class="logo-footer">
-                <a href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/rhein_agro_pharm_logo.svg" alt=""></img></a>
-              </div>
-
-            </div>
-
-            <div class="footer-right-first" style="">
-
-              <a href="/"><i class="fab fa-instagram"></i></a>
-              <a href="/" href=""><i class="fab fa-facebook-square"></i></a>
-              <a href="/"><i class="fab fa-youtube"></i></a>
-
-            </div>
-          </div>
-
-          <div class="footer-second">
-            <div class="footer-left-second" style="">
-              Copyright © <?php echo wpb_copyright(); ?> Rhein Agro Pharm d.o.o
-            </div>
-
-      
-
-
-                   <div class="footer-center-second" style="">
-                       <a href="/contact">Contact</a>
-                       <a href="/">Impressum</a>
-                       <a href="/">AGB</a>
-                       <a href="/privacy-and-policy">Privacy & Policy</a>
-                   </div>
+  </div>
+  <div class="footer-content-left padding-left-130">
+            <?php
+							wp_nav_menu( array(
+								'walker'          => new Main_Menu_Sublevel_Walker(),
+							  'theme_location'  => 'footer_menu',
+								'container_class' => 'footer-menu padding-15',
+								'menu_class'      => 'footer-menu' ) );
+						?>
+  </div>
+    <div class="footer-content-right padding-right-130">
+      <div class="footer-content-inner-left">
+        <h5>Kontakt</h5>
+        <p>Csc Group GmbH<br> 
+           Nürtinger Str. 11<br>
+           D-73257 Köngen
+        </p>
+        <div class="footer-content-right-sm">
+          <a href="/"><span><i class="fab fa-linkedin-in"></i></span></a>
+          <a href="/" href=""><span><i class="fab fa-facebook-square"></i></span></a>
+          <a href="/"><span><i class="fab fa-youtube"></i></span></a>
+          <a href="/"><span><i class="fab fa-twitter"></i></span></a>
+        </div>
 
 
+        
+      </div>
+      <div class="footer-content-inner-right">
+        <h5 class="main-green-color">Kontaktiere Uns</h5>
+        <p>info@csc.de<br> 
+        Telefon: 07024 409220<br>
+        Fax: 07024 409220
+        </p>
+        <a class="footer-content-inner-right-icon" href="/"><span><i class="fal fa-envelope-open-text"></i></span></a>
+        <img src="http://csc.oompa.de/wp-content/uploads/2020/07/footer-tervis-gmbh.png" alt="">
+      </div>
+    </div>
+  </div>
+
+        
+  <div class="footer-bottom">
+    <div>
+
+      <div class="footer-bottom-left padding-left-130 padding-15">
+            Copyright <?php echo wpb_copyright(); ?> CSC Group GmbH
+      </div>
+      <div class="footer-bottom-menu">
+            <?php
+							wp_nav_menu( array(
+								'walker'          => new Main_Menu_Sublevel_Walker(),
+							  'theme_location'  => 'footer_menu',
+								'container_class' => 'footer-menu',
+								'menu_class'      => 'footer-menu' ) );
+						?>
+      </div>
+      <div class="footer-bottom-right padding-right-130 padding-15">
+            Website by <a href="https://oompa.de">OOMPA Design</a>
+      </div>
+
+    </div>
+  </div>
 
 
 
-
-              <div class="footer-right-second" style="">
-
-                  Site by <a href="https://rheinsolutions.com" target="_blank"><strong>RheinSolution</strong></a>
-
-              </div>
-          </div>
-
-				</div>
-			</div>
+</div>
 
 
 <?php wp_footer(); ?>
 </body>
 </html>
+

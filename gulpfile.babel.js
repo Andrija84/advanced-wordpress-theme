@@ -16,32 +16,17 @@ const concat = require('gulp-concat');
 const merge = require('merge2')
 const PRODUCTION = yargs.argv.prod;
 
-/*
-export const minifySCSS = () => {
-  return src(['src/scss/*.scss'])
-    .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulpif(PRODUCTION, postcss([ autoprefixer ])))
-    .pipe(gulpif(PRODUCTION, cleancss({compatibility:'ie8'})))
-    .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
-    .pipe(dest('dist/css'));
-}
 
-export const minifyCSS = () => {
-  return src('src/css/*.css')
-    .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-    .pipe(gulpif(PRODUCTION, postcss([ autoprefixer ])))
-    .pipe(gulpif(PRODUCTION, cleancss({compatibility:'ie8'})))
-    .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
-    .pipe(concat('bundle.css')) 
-    .pipe(dest('dist/css'));
-}
-*/
-
-export const optimizeImages = () => {
+export const optimizeMediaLibrary = () => {
   return src('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}')
     .pipe(gulpif(PRODUCTION, imagemin()))
     .pipe(dest('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads'));
+}
+
+export const optimizeStaticImages = () => {
+  return src(['images/*.{jpg,jpeg,png,svg,gif}'])
+    .pipe(gulpif(PRODUCTION, imagemin()))
+    .pipe(dest('images/'));
 }
 
 export const minifyCSS = () => {
@@ -104,19 +89,17 @@ export const reload = done => {
 
 
 export const watchForChanges = () => {
-  //watch('src/scss/**/*.scss', minifySCSS);
-  //watch('src/css/**/*.css', minifyCSS);
-  //watch('src/scss/**/*.scss', series(minifyCSS, reload));
   watch('src/scss/**/*.scss', minifyCSS);
   watch('src/css/**/*.css', minifyCSS);
   watch('src/js/**/*.js', minifyJS);
-  watch('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', optimizeImages);
+  watch('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', optimizeMediaLibrary);
+  watch('images/*.{jpg,jpeg,png,svg,gif}', optimizeStaticImages);
   watch("**/*.php", reload);
 }
 
 
-export const dev = series(clean, parallel(minifyCSS, minifyJS, optimizeImages), serve, watchForChanges);
-//export const build = series(clean, minifySCSS, minifyCSS, optimizeImages);
-export const build = series(clean, parallel(minifyCSS,minifyJS, optimizeImages), pot);
+export const dev = series(clean, parallel(minifyCSS, minifyJS, optimizeMediaLibrary, optimizeStaticImages), serve, watchForChanges);
+//export const build = series(clean, minifySCSS, minifyCSS, optimizeMediaLibrary);
+export const build = series(clean, parallel(minifyCSS,minifyJS, optimizeMediaLibrary, optimizeStaticImages), pot);
 export default dev;
 

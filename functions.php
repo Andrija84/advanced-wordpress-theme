@@ -1,5 +1,6 @@
 <?php
 
+//INCLUDE / REQUIRE
 require_once( __DIR__ . '/functions/admin.php');
 require_once( __DIR__ . '/functions/optimize.php');
 //require_once( __DIR__ . '/functions/google.php');
@@ -7,15 +8,12 @@ require_once( __DIR__ . '/functions/acf.php');
 //require_once( __DIR__ . '/functions/woocommerce.php');
 
 
-
-
-
 /***  LOAD SCRIPTS  ****/
 function theme_enqueue_scripts() {
 
 	$template_url = get_stylesheet_directory_uri();
 
-	//jQuery.
+	//LOAD NATIVE JQUERY
 	wp_enqueue_script( 'jquery' );
 	//De-register WP Jquery and use latest from CDN
 	//wp_deregister_script('jquery');
@@ -51,7 +49,7 @@ add_action( 'admin_enqueue_scripts', 'admin_screen_css');
 
 
 
-//Increase php limits
+//PHP LIMITS
 @ini_set( 'upload_max_size' , '128M' );
 @ini_set( 'post_max_size', '128M');
 @ini_set( 'max_execution_time', '300' );
@@ -70,7 +68,7 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 
 
-/*EXTEND MENU WALKER CLASS */
+/* EXTEND MENU WALKER CLASS */
 class Main_Menu_Sublevel_Walker extends Walker_Nav_Menu
 {
     function start_lvl( &$output, $depth = 0, $args = array() ) {
@@ -120,7 +118,7 @@ global $wpdb;
 }
 
 
-/* DISABLE SEARCH FUNCTION AT ALL */
+// DISABLE SEARCH FUNCTION AT ALL
 function fb_filter_query( $query, $error = true ) {
 
 if ( is_search() ) {
@@ -139,7 +137,8 @@ add_filter( 'get_search_form', create_function( '$a', "return null;" ) );
 
 
 
-//Prevent default media uploads by year/month
+//PREVENT MEDIA LIBRARY TO ORGANIZE MEDIA FILES INSIDE DATE FOLDERS
+//GLUP IS DOING OPTIMIZATION THE IMAGES
 function media_library_upload_option() {
   update_option('uploads_use_yearmonth_folders', 0);
 }
@@ -147,7 +146,7 @@ add_action('after_setup_theme', 'media_library_upload_option');
 
 
 
-//HTML COMPRESSION 
+//HTML COMPRESSION - FUNCTIN CALLED FROM OPTIMIZE.PHP FILE
 add_action('get_header', 'wp_html_compression_start');
 function wp_html_compression_start()
 {
@@ -157,6 +156,3 @@ function wp_html_compression_finish($html)
 {
     return new WP_HTML_Compression($html);
 }
-
-
-

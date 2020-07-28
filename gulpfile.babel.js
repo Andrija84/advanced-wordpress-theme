@@ -11,22 +11,34 @@ import del from 'del';
 import browserSync from "browser-sync";
 import wpPot from "gulp-wp-pot";
 import info from "./package.json";
+//const imageminMozjpeg = require('imagemin-mozjpeg');
+const onlyChanged = require('gulp-changed')
 const minify = require('gulp-minify');
 const concat = require('gulp-concat');
 const merge = require('merge2')
 const PRODUCTION = yargs.argv.prod;
 
+//const mediaLibrarySrc = 'C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}';
+//const mediaLibraryDest = 'C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/';
+
+
 
 export const optimizeMediaLibrary = () => {
   return src('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}')
-    .pipe(gulpif(PRODUCTION, imagemin()))
-    .pipe(dest('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads'));
+  //.pipe(newer(mediaLibraryDest))
+  //.pipe(onlyChanged('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', {hasChanged: onlyChanged.compareContents}))
+  .pipe(gulpif(PRODUCTION, imagemin()))
+  .pipe(dest('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/'));
 }
+
+
+
 
 export const optimizeStaticImages = () => {
   return src(['images/*.{jpg,jpeg,png,svg,gif}'])
-    .pipe(gulpif(PRODUCTION, imagemin()))
-    .pipe(dest('images/'));
+  //.pipe(newer(mediaLibraryDest))
+  .pipe(gulpif(PRODUCTION, imagemin()))
+  .pipe(dest('images/'));
 }
 
 export const minifyCSS = () => {
@@ -50,17 +62,26 @@ export const minifyCSS = () => {
 
 export const minifyJS = () => {
   return src('src/js/*.js', { allowEmpty: true }) 
-    //.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
+    .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
     .pipe(gulpif(PRODUCTION, minify({noSource: true})))
-    //.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
+    .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(concat('bundle.js')) 
     .pipe(dest('dist/js'));
 }
 
-
-
 export const clean = () => {
   return del(['dist']);
+}
+
+export const copyImagesTemp = () => {
+  return src('imageTemp/*.{jpg,jpeg,png,svg,gif}', { allowEmpty: true, overwrite: true })
+  .pipe(dest('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads'));
+}
+
+
+
+export const cleanImagesTemp = () => {
+  return del(['imageTemp']);
 }
 
 export const pot = () => {
@@ -82,24 +103,30 @@ export const serve = done => {
   });
   done();
 };
+
 export const reload = done => {
   server.reload();
   done();
 };
 
 
-export const watchForChanges = () => {
+
+export const watchChanges = () => {
   watch('src/scss/**/*.scss', minifyCSS);
   watch('src/css/**/*.css', minifyCSS);
   watch('src/js/**/*.js', minifyJS);
-  watch('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', optimizeMediaLibrary);
-  watch('images/*.{jpg,jpeg,png,svg,gif}', optimizeStaticImages);
+  //watch('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', optimizeMediaLibrary);
+  //watch('images/*.{jpg,jpeg,png,svg,gif}', optimizeStaticImages);
   watch("**/*.php", reload);
+ }
+
+
+export const watchMediaLibrary = () => {
+  watch('C:\/xampp\/htdocs\/gulp\/wp-content\/uploads/*.{jpg,jpeg,png,svg,gif}', series(optimizeMediaLibrary, reload));
 }
 
 
-export const dev = series(clean, parallel(minifyCSS, minifyJS, optimizeMediaLibrary, optimizeStaticImages), serve, watchForChanges);
+export const dev = series(clean, parallel(minifyCSS, minifyJS, optimizeMediaLibrary, optimizeStaticImages), serve, watchChanges);
 //export const build = series(clean, minifySCSS, minifyCSS, optimizeMediaLibrary);
-export const build = series(clean, parallel(minifyCSS,minifyJS, optimizeMediaLibrary, optimizeStaticImages), pot);
+export const build = series(clean, parallel(minifyCSS, minifyJS, optimizeMediaLibrary, optimizeStaticImages), pot);
 export default dev;
-
